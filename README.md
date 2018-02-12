@@ -1,4 +1,7 @@
 # Alarm-Clock
+# My Contributions
+For this project, most of my contributions went towards HTML/CSS, design and project managment.
+
 ## SENG 403 - Group Project
 In	this	project	you	will	use	scrum	methodology	to	design	and	build	an alarm	clock in	a	group	of	six	
 or	seven. This	project	has	four	deliverables that	are	worth	70	marks	in	total.
