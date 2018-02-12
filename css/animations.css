@@ -1,0 +1,67 @@
+/* move 100 px and fade left/right */
+@keyframes fade-right{
+    0% {
+        opacity:1;
+        transform:  translate(0px,0px)  ;
+    }
+    50% {
+        opacity:0;
+        transform:  translate(100px,0px)  ;
+    }
+    100% {
+        opacity:0;
+        transform:  translate(100px,0px)  ;
+    }
+}
+
+@keyframes fade-left{
+    0% {
+        opacity:1;
+        transform:  translate(0px,0px)  ;
+    }
+    50% {
+        opacity:0;
+        transform:  translate(-100px,0px)  ;
+    }
+    100% {
+        opacity:0;
+        transform:  translate(-100px,0px)  ;
+    }
+}
+
+/* Dismiss Button */
+.ro-1{
+    animation: fade-right linear 2s;
+    animation-iteration-count: infinite;
+    transform-origin: 50% 50%;
+}
+
+.ro-2{
+    animation: fade-right linear 2s 0.2s;
+    animation-iteration-count: infinite;
+    transform-origin: 50% 50%;
+}
+
+.ro-3{
+    animation: fade-right linear 2s 0.4s;
+    animation-iteration-count: infinite;
+    transform-origin: 50% 50%;
+}
+
+.lo-1{
+    animation: fade-left linear 2s;
+    animation-iteration-count: infinite;
+    transform-origin: 50% 50%;
+}
+
+.lo-2{
+    animation: fade-left linear 2s 0.2s;
+    animation-iteration-count: infinite;
+    transform-origin: 50% 50%;
+}
+
+.lo-3{
+    animation: fade-left linear 2s 0.4s;
+    animation-iteration-count: infinite;
+    transform-origin: 50% 50%;
+}

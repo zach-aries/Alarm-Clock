@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SENG 403 Clock</title>
+
+	<!-- stylesheet declarations -->
+	<link rel="stylesheet" href="css/clock.css">
+	<link rel="stylesheet" href="css/glyphicons.css">
+	<link rel="stylesheet" href="css/animations.css">
+	<link rel="stylesheet" href="css/picker.css">
+	<link rel="stylesheet" href="css/switchery.min.css" />
+
+</head>
+<body>
+
+	<!-- Sidebar Menu -->
+	<div id="side-bar" class="closed">
+		<div id="navbar">
+			<a href="#" onclick="toggleInnerMenu(this);return !1" id="ialarm" class="icon active">
+				<span class="glyphicon glyphicon-bell" style="font-size: 30px; line-height: 34px;"></span>
+			</a>
+			<a href="#" onclick="toggleInnerMenu(this);return !1" id="isettings" class="icon">
+				<span class="glyphicon glyphicon-cog"></span>
+			</a>
+		</div>
+		<div id="inner-menu-container">
+			<!-- Alarm Menu -->
+			<div id="alarm-menu" class="inner-menu">
+				<h3 style="position: relative">Alarms
+					<a href="#" onclick="openAlarmPicker();return !1" style="float:right; color: #333;"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+					<!--<a href="#" onclick="AlarmManager.addAlarm();return !1" style="float:right; color: #333;"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>-->
+					<button style="display: none;" onclick="openAlarmPicker();return !1" id="addAlarm" class="btn-success" value="New Alarm"></button>
+				</h3>
+				<div id="alarms"></div>
+
+
+			</div>
+			<!-- Alarm Menu -->
+
+			<!-- Settings Menu -->
+			<div id="settings-menu" class="inner-menu closed">
+				<h3>Settings</h3>
+				<ul>
+					<li id="timeChanger">
+						<label>Time Scale = <span id="timeScaleCur">1</span></label>
+						<input id="timeScaleReset" type="button" value="1x" style="float:right" />
+						<input id="timeScale" type="range" min="-100" max="600" value="0" />
+					</li>
+					<li id="clock-changer">
+						Digital<input type="checkbox" id="clock-switch" />Analog
+					</li>
+					<li>
+						Continuous<input type="checkbox" id="discrete-switch" />Discrete
+					</li>
+					<li>
+						12-h<input type="checkbox" id="24-switch" />24-h
+					</li>
+					<li>
+						Instant Dismiss<input type="checkbox" id="dismiss-challenge" />Show Challenge
+					</li>
+					<li>
+						Default Snooze Amount <input style="margin: 0 5px;"id="defaultSnooze" type="number" min="1" max="60" value="5" /> min
+					</li>
+				</ul>
+			</div>
+			<!-- Settings Menu -->
+
+		</div>
+		<!-- Sidebar Menu -->
+
+
+	</div>
+	<div id="content-wrapper" class="full-width">
+		<a href="#" onclick="toggleNavigationMenu(this);return !1" style="margin-right: 0;" class="icon perm closed iham">
+			<span class="glyphicon glyphicon-option-vertical"></span>
+		</a>
+
+		<!-- day of week -->
+		<ul id="curDOW" class="cur-dow0">
+			<li class="dow dow0">S</li>
+			<li class="dow dow1">M</li>
+			<li class="dow dow2">T</li>
+			<li class="dow dow3">W</li>
+			<li class="dow dow4">T</li>
+			<li class="dow dow5">F</li>
+			<li class="dow dow6">S</li>
+		</ul>
+
+		<div id="clock-wrapper">
+			<!-- current time -->
+			<div id="curTime">
+				<span id="curH"></span>:<span id="curM"></span>:<span id="curS"></span> <span id="curAMPM"></span>
+			</div>
+		</div>
+		<div id="analog-clock-wrapper" style="display: none;">
+			<img id="clock-face" src="img/clockface.png"	/>
+			<img id="hour-hand" src="img/hourhand.png" style="z-index: 999;"/>
+			<img id="minute-hand" src="img/minutehand.png" />
+			<img id="second-hand" src="img/secondhand.png" />
+		</div>
+
+		<div class="dismiss-wrapper">
+			<h2 id="activated-alarm-label"></h2>
+			<!-- Dismiss Button with animations -->
+			<button id="dismiss" value="Dismiss All" disabled>
+				<span class="glyphicon glyphicon-menu-left bars lo-1"></span>
+				<span class="glyphicon glyphicon-menu-left bars lo-2"></span>
+				<span class="glyphicon glyphicon-menu-left bars lo-3"></span>
+				<span style="margin: 0 40px;">Dismiss Alarm</span>
+				<span class="glyphicon glyphicon-menu-right bars ro-1"></span>
+				<span class="glyphicon glyphicon-menu-right bars ro-2"></span>
+				<span class="glyphicon glyphicon-menu-right bars ro-3"></span>
+			</button>
+
+			<!-- Snooze Button -->
+			<button id="snooze" value="Snooze All" disabled>
+				<span style="margin: 0 40px;">Snooze</span>
+			</button>
+		</div>
+	</div>
+
+	<!-- Alarm Picker -->
+	<div id="alarm-picker-overlay" class="closed">
+		<div id="alarm-picker-container">
+			<h3>Set Alarm</h3>
+
+			<!-- Labels -->
+			<table id="time-picker-label">
+				<tr>
+					<td>Hour</td>
+					<td>Minute</td>
+				</tr>
+			</table>
+
+			<!-- Scrolling Time Picker -->
+			<div id="time-picker-container"></div>
+
+			<!-- Inline Day Picker -->
+			<ul id="day-picker" class="horizontal-selector">
+				<li><a href="#" id="day-picker0" onclick="setDayOfWeek('Su', this);return !1">S</a></li>
+				<li><a href="#" id="day-picker1" onclick="setDayOfWeek('M', this);return !1">M</a></li>
+				<li><a href="#" id="day-picker2" onclick="setDayOfWeek('T', this);return !1">T</a></li>
+				<li><a href="#" id="day-picker3" onclick="setDayOfWeek('W', this);return !1">W</a></li>
+				<li><a href="#" id="day-picker4" onclick="setDayOfWeek('Th', this);return !1">T</a></li>
+				<li><a href="#" id="day-picker5" onclick="setDayOfWeek('F', this);return !1">F</a></li>
+				<li><a href="#" id="day-picker6" onclick="setDayOfWeek('S', this);return !1">S</a></li>
+			</ul>
+
+			<!-- Options -->
+			<h4>Options:</h4>
+
+            <label>Label:</label>
+            <input  id="alarm-label" style="margin-bottom: 7px;" type="text" value="Alarm">
+            <br>
+
+			<label>Alarm Tone:</label>
+			<select id="alarm-tone-input" name="alarm-tone-picker" style="margin-bottom: 7px;">
+				<option value="0">Default</option>
+				<option value="1">Tone 1</option>
+				<option value="2">Tone 2</option>
+				<option value="3">Tone 3</option>
+			</select>
+
+			<br>
+			<label>Snooze Time (0 = use default)</label>
+			<input style="margin: 0 5px;" id="alarm-snooze-set" type="number" min="0" max="60" value="0">
+
+			<input type="text" id="time-picker" class="form-control" value="00:00" style="display: none;">
+			<!-- Options -->
+
+			<hr style="clear: both; ">
+
+			<!-- ******
+			When a user presses this button it should add the alarm to the side menu
+			The alarm in the side menu should be static text with an edit button
+			-->
+			<button id="set-alarm-set" class="btn-success">Set Alarm</button>
+
+			<!-- ****** -->
+
+			<button onclick="closeAlarmPicker()" id="cancel-alarm-set" class="btn-danger">Cancel</button>
+		</div>
+	</div>
+	<!-- Alarm Picker -->
+
+	<!-- Audio Files -->
+	<audio id="audio0"><source src="sounds/St. Jimmy.mp3" type="audio/mpeg" /></audio>
+	<audio id="audio1"><source src="sounds/Alarm 1.mp3" type="audio/mpeg" /></audio>
+	<audio id="audio2"><source src="sounds/Alarm 2.mp3" type="audio/mpeg" /></audio>
+	<audio id="audio3"><source src="sounds/Alarm 3.mp3" type="audio/mpeg" /></audio>
+
+	<!-- JavaScript Links -->
+	<script src="js/jquery-3.1.1.min.js"></script>
+	<script src="js/clock.faketime.js"></script>
+	<script src="js/clock.alarm.js"></script>
+	<script src="js/clock.js"></script>
+	<script src="js/ui.js"></script>
+	<script src="js/picker.min.js"></script>
+	<script src="js/switchery.min.js"></script>
+
+	<script>
+		// initialize the time picker, it adds html elements to the #time-picker-continaer
+		const picker = new Picker(document.getElementById('time-picker'), {
+			container: '#time-picker-container',
+			inline: true,
+			format: 'HH:mm',
+		});
+
+		var clockSwitch = document.getElementById('clock-switch');
+		new Switchery(clockSwitch, { size : 'small' });
+
+		clockSwitch.onchange = function() {
+			if(clockSwitch.checked){
+				$( "#analog-clock-wrapper" ).css("display", "block");
+				$( "#clock-wrapper" ).css("display", "none");
+				//$( "#curDOW").css("text-align", "center");
+                //$( "#curDOW").css("margin", "0");
+			}else{
+				$( "#analog-clock-wrapper" ).css("display", "none");
+				$( "#clock-wrapper" ).css("display", "block");
+                //$( "#curDOW").css("text-align", "left");
+                //$( "#curDOW").css("margin", "0 0 0 115px");
+			}
+		};
+
+		var discreteSwitch = document.getElementById('discrete-switch');
+		new Switchery(discreteSwitch, { size : 'small' });
+
+		var switch_12_24 = document.getElementById('24-switch');
+		new Switchery(switch_12_24, { size : 'small' });
+
+		var dismissSwitch = document.getElementById('dismiss-challenge');
+		new Switchery(dismissSwitch, { size : 'small' });
+
+		window.picker = picker
+	</script>
+</body>
+</html>

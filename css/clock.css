@@ -1,0 +1,478 @@
+/*
+ * clock.css
+ *
+ * A stylesheet for our entire project, unless we split it into more files.
+ */
+
+
+/* import google font */
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono:100');
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,700');
+
+/* page setup */
+html, body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	width: 100%;
+	font-family: 'Roboto', sans-serif;
+}
+
+h3 {
+	color: #333;
+	border-bottom: solid 1px #e7e7e7;
+	padding: 0 10px 15px 10px;
+	text-transform: uppercase;
+	font-weight: 300;
+	margin-bottom: 0;
+}
+
+h4 {
+	color: #333;
+	border-bottom: solid 1px #e7e7e7;
+	padding: 0 10px 15px 10px;
+	text-transform: uppercase;
+	font-weight: 300;
+	margin-bottom: 10px;
+	padding-bottom: 7px;
+	padding-left: 0;
+}
+
+h5 {
+    padding: 7px 0 0 0;
+    margin: 0;
+    clear: both;
+    font-weight: 300;
+    /* text-decoration: underline; */
+    /* border-top: 1px solid #eee; */
+}
+
+p {
+	color: #555;
+	font-weight: 300;
+}
+
+label {
+	font-weight: 300;
+	color: #555;
+}
+
+hr {
+	display: block;
+	height: 1px;
+	border: 0;
+	border-top: 1px solid #e7e7e7;
+	margin: 1em 0;
+	padding: 0;
+}
+
+/* background styles */
+#content-wrapper {
+	background-image: url(../img/ufc_bg_tfdl.jpg);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	backround: blue;
+	height: 100%;
+	width: 75%;
+	float: left;
+	position: absolute;
+	left: 25%;
+	box-shadow: rgba(0,0,0,0.6) -2px 0 2px;
+}
+
+#content-wrapper.full-width {
+	width: 100%;
+	left: 0;
+}
+
+/* menu styles */
+
+#content-wrapper, #side-bar {  transition: all 0.2s;  }
+
+#side-bar {
+	width: 25%;
+	height: 100%;
+	float: left;
+	position: relative;
+}
+
+	#navbar {
+		height: 46px;
+		background: #333;
+	}
+		.icon {
+			width: 32px;
+			height: 32px;
+			float: left;
+			padding: 7px;
+			background: #333;
+		}
+			.icon.perm {
+				position: absolute;
+				z-index: 999;
+				border-radius: 0;
+				background: rgba(255,255,255,0);
+				border-radius: 0;
+				transition: background 0.2s, border-radius 0.4s;
+				padding: 7px 0;
+			}
+				.icon.active { background: #fff; }
+				.icon.perm:hover {
+					background: rgba(255,255,255,0.2);
+					border-radius: 0 10px 10px 0;
+				}
+
+				.icon > span {
+					font-size: 32px;
+					line-height: 32px;
+					color: #ceced5;
+					transition: color 0.3s;
+				}
+
+				.icon:hover > span { color: #fff; }
+				.icon.active > span { color: #66cccc; }
+
+				.icon.perm > span {
+					color: #fff!important;
+					font-size: 28px;
+				}
+
+#inner-menu-container {
+	height: calc(100% - 55px);
+	width: 100%;
+	position: relative;
+	overflow-y: scroll;
+}
+	.inner-menu {
+		min-height: 100%;
+		position: absolute;
+		transition: left 0.3s;
+		padding: 0 2%;
+		width: 96%;
+		left: 0;
+		box-shadow: rgba(0,0,0,0.15) 7px 0 20px;
+	}
+
+		.inner-menu.closed {
+			left: -100%;
+		}
+
+/* Alarm Menu Styles */
+#alarms .alarm {
+    height: 75px;
+    border-bottom: solid 1px #eee;
+}
+	.alarm a.active.on {
+		color: #66cccc;
+	}
+	.alarm a.active {
+		color: #ccc;
+		font-size: 32px;
+		height: 32px;
+		display: block;
+		margin: 8px 0;
+		float: left;
+	}
+	.alarm-display {
+		float: left;
+		margin: 0 25px;
+		width: 80px;
+	}
+		.alarm .time-display {
+			font-size: 18px;
+			text-align: center;
+			font-weight: 300;
+			margin-top: 6px;
+		}
+			.alarm .day-picker-display {
+				margin: 4px 0;
+				font-size: 12px;
+			}
+
+				.alarm .day-picker-display li {
+					padding: 0;
+				}
+				.alarm .day-picker-display li.active {
+					color: #66cccc;
+				}
+	.alarm button {
+		float: left;
+	}
+		.alarm button.btn-sm {
+			margin: 13px 4px;
+		}
+
+
+/*#alarms table {
+	width: 100%;
+}
+#alarms table td {
+	padding: 5px;
+	border-bottom: solid 1px #f4f4f4;
+}
+	#alarms a.active {
+		color: #ccc;
+		font-size: 28px;
+		height: 28px;
+		display: block;
+	}
+		#alarms a.active.on { color: #66cccc;  }
+	#alarms .time-display {
+		margin: 0 6px;
+		font-size: 18px;
+		font-weight: 300;
+	}*/
+
+/* settings menu */
+#settings-menu > ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 15px 0;
+}
+	#settings-menu > ul > li {
+		margin-bottom: 15px;
+		padding-bottom: 15px;
+		border-bottom: solid 1px #e7e7e7;
+		color: #555;
+		font-weight: 300;
+	}
+
+	span.switchery.switchery-small {
+		margin: 0 25px;
+	}
+/* clock styles */
+
+#curDOW {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 48px;
+    color: #aaa;
+    text-shadow: rgba(0,0,0,0.8) 3px 3px 0px;
+    list-style: none;
+    margin: 12px 0 0 0;
+    padding: 0;
+    text-align: center;
+}
+
+#curDow.analog {
+    margin: 0;
+    text-align: center;
+}
+
+	#curDOW li {
+        display: inline;
+	}
+
+    #curDOW.cur-dow0 .dow0,
+    #curDOW.cur-dow1 .dow1,
+    #curDOW.cur-dow2 .dow2,
+    #curDOW.cur-dow3 .dow3,
+    #curDOW.cur-dow4 .dow4,
+    #curDOW.cur-dow5 .dow5,
+    #curDOW.cur-dow6 .dow6 {
+        font-size: 72px;
+        font-weight: bold;
+        color: #eee;
+    }
+
+#curTime {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 128px;
+    color: #fff;
+    text-shadow: rgba(0,0,0,0.8) 3px 3px 0px;
+	/*
+    text-align: left;
+    margin-left: 50px;
+	*/
+}
+
+#clock-wrapper {
+	padding: 50px;
+	text-align: center;
+}
+
+#activated-alarm-label {
+	color: #fff;
+	text-align: center;
+	margin: 0;
+	background: rgba(0,0,0,0.5);
+	padding: 10px 0;
+	font-weight: 100;
+	border-radius: 5px;
+	display: none;
+}
+#activated-alarm-label.active { display: block; }
+
+.alarmSetter { height: 55px; }
+input, button, submit {
+	cursor: pointer;
+}
+button:disabled, submit:disabled { cursor: pointer; }
+
+button, submit {
+	padding: 6px 12px;
+	margin: 5px 5px;
+	font-size: 14px;
+	border-radius: 5px;
+	background: #fff;
+	border: solid 1px #ccc;
+	color: #333;
+}
+	button:disabled, submit:disabled {
+		background: #e9e9e9;
+		color: #888!important;
+		cursor: auto;
+	}
+	button:focus, submit:focus {
+		outline: 0;
+	}
+		.btn-sm {
+			font-size: 12px;
+			padding: 3px 8px;
+			border-radius: 3px;
+		}
+
+	.dismiss-wrapper {
+		position: absolute;
+		width: 310px;
+		left: 50%;
+		margin-left: -155px;
+	}
+
+		#dismiss {
+			width: 300px;
+			height: 56px;
+			background: #f54842;
+			border: none;
+			box-shadow: rgba(0,0,0,0.4) 2px 2px 5px;
+			color: #fff!important;
+			font-size: 26px;
+			opacity: 1;
+			position: relative;
+			transition: opacity 0.5s;
+		}
+
+		#snooze {
+			width: 300px;
+			height: 56px;
+			background: #66cccc;
+			border: none;
+			box-shadow: rgba(0,0,0,0.4) 2px 2px 5px;
+			color: #fff!important;
+			font-size: 26px;
+			opacity: 1;
+			transition: opacity 0.5s;
+			z-index: 9999;
+		}
+
+		#dismiss:disabled, #snooze:disabled { opacity: 0; }
+
+			#dismiss .bars {
+				font-size: 38px;
+				top: 11px;
+				position: absolute;
+			}
+
+			#dismiss .glyphicon-menu-right {
+				right: 10%;
+			}
+
+			#dismiss .glyphicon-menu-left {
+				left: 10%;
+			}
+
+button#addAlarm {
+			font-family: 'Roboto Mono', monospace;
+			background: none;
+			color: #333;
+			font-size: 28px;
+			line-height: 28px;
+			font-weight: 100;
+			border: 0;
+			padding: 0;
+			margin: 0;
+			position: absolute;
+			right: 5px;
+			top: -5px;
+		}
+
+		.btn-success {
+			background: #66cccc;
+			color: #fff;
+		}
+		.btn-danger {
+			background: #cc3f52;
+			color: #fff;
+		}
+
+#timeScale {
+	width: 98%;
+}
+
+/* set alarm overlay */
+#alarm-picker-overlay {
+	background: rgba(0,0,0,0.3);
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	z-index: 999;
+}
+	#alarm-picker-overlay label {
+		font-size: 14px;
+	}
+
+	#alarm-picker-overlay.closed {  display: none;  }
+
+	#alarm-picker-container {
+		width: 500px;
+		height: 495px;
+		background: #fff;
+		margin: 100px auto;
+		border-radius: 5px;
+		box-shadow: rgba(0,0,0,0.75) 5px 5px 10px;
+		padding: 25px;
+	}
+	#alarm-picker-container h3 { margin-top: 0; }
+
+	#cancel-alarm-set, #set-alarm-set { float: right; }
+
+#time-picker-container {  cursor: pointer;  }
+
+#time-picker-label{
+	width: 100%;
+	border: solid 1px #eee;
+}
+	#time-picker-label td {
+		width: 50%;
+		text-align: center;
+	}
+
+.horizontal-selector {
+	padding: 0;
+	list-style: none;
+	width: 100%;
+	text-align: center;
+}
+
+	.horizontal-selector li {
+		display: inline;
+		padding: 10px;
+	}
+		.horizontal-selector li a {
+			text-decoration: none;
+			color: #999;
+		}
+
+		.horizontal-selector li a.active {  color: #66cccc;  }
+
+/* anolog styles */
+#analog-clock-wrapper {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -250px;
+	margin-top: -200px; /* shifted up by 50px */
+}
+	#analog-clock-wrapper img {
+		position: absolute;
+	}
