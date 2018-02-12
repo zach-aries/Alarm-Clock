@@ -1,5 +1,5 @@
 # Alarm-Clock
-# My Contributions
+### My Contributions
 For this project, most of my contributions went towards HTML/CSS, design and project managment.
 
 ## SENG 403 - Group Project
