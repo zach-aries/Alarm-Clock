@@ -1,6 +1,8 @@
 # Alarm-Clock
 ### My Contributions
 For this project, most of my contributions went towards HTML/CSS, design and project managment.
+### Project Demo
+[https://zach-aries.github.io/Alarm-Clock/](https://zach-aries.github.io/Alarm-Clock/)
 
 ## SENG 403 - Group Project
 In	this	project	you	will	use	scrum	methodology	to	design	and	build	an alarm	clock in	a	group	of	six	
